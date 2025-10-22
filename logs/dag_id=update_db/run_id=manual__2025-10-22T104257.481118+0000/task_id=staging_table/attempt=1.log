@@ -1,0 +1,43 @@
+[2025-10-22T10:43:04.114+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-10-22T10:43:04.229+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: update_db.staging_table manual__2025-10-22T10:42:57.481118+00:00 [queued]>
+[2025-10-22T10:43:04.270+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: update_db.staging_table manual__2025-10-22T10:42:57.481118+00:00 [queued]>
+[2025-10-22T10:43:04.272+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-10-22T10:43:04.345+0000] {taskinstance.py:2330} INFO - Executing <Task(_PythonDecoratedOperator): staging_table> on 2025-10-22 10:42:57.481118+00:00
+[2025-10-22T10:43:04.379+0000] {standard_task_runner.py:63} INFO - Started process 92 to run task
+[2025-10-22T10:43:04.397+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'update_db', 'staging_table', 'manual__2025-10-22T10:42:57.481118+00:00', '--job-id', '38', '--raw', '--subdir', 'DAGS_FOLDER/main.py', '--cfg-path', '/tmp/tmplrqrtbes']
+[2025-10-22T10:43:04.421+0000] {standard_task_runner.py:91} INFO - Job 38: Subtask staging_table
+[2025-10-22T10:43:04.829+0000] {task_command.py:426} INFO - Running <TaskInstance: update_db.staging_table manual__2025-10-22T10:42:57.481118+00:00 [running]> on host 2297e7c7f2c6
+[2025-10-22T10:43:05.214+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_EMAIL='gidiboateng200@gmail.com' AIRFLOW_CTX_DAG_OWNER='dataengineers' AIRFLOW_CTX_DAG_ID='update_db' AIRFLOW_CTX_TASK_ID='staging_table' AIRFLOW_CTX_EXECUTION_DATE='2025-10-22T10:42:57.481118+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-22T10:42:57.481118+00:00'
+[2025-10-22T10:43:05.218+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-10-22T10:43:05.279+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2025-10-22T10:43:05.315+0000] {data_loading.py:12} INFO - Processing file: YT_data_2025-10-22
+[2025-10-22T10:43:05.420+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2025-10-22T10:43:05.437+0000] {base.py:84} INFO - Using connection ID 'postgres_db_yt_elt' for task execution.
+[2025-10-22T10:43:05.482+0000] {dataware_house.py:57} ERROR - An error occurred during the update of staging table: name 'insert_rows' is not defined
+[2025-10-22T10:43:05.502+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-10-22T10:43:05.508+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/decorators/base.py", line 265, in execute
+    return_value = super().execute(context)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.10/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/datawarehouse/dataware_house.py", line 58, in staging_table
+    raise e
+  File "/opt/airflow/dags/datawarehouse/dataware_house.py", line 39, in staging_table
+    insert_rows(cur, conn, schema, row)
+NameError: name 'insert_rows' is not defined
+[2025-10-22T10:43:05.556+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=update_db, task_id=staging_table, run_id=manual__2025-10-22T10:42:57.481118+00:00, execution_date=20251022T104257, start_date=20251022T104304, end_date=20251022T104305
+[2025-10-22T10:43:05.593+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 38 for task staging_table (name 'insert_rows' is not defined; 92)
+[2025-10-22T10:43:05.632+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-10-22T10:43:05.738+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-10-22T10:43:05.755+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
