@@ -33,8 +33,8 @@ def test_dagbag_integrity(dagbag):
     print(dagbag.size())
 
     expected_task_counts = {
-        "produce_json": 4,
-        "update_db": 2,
+        "produce_json": 5,
+        "update_db": 3,
         "data_quality": 2
     }
     print("==============")
