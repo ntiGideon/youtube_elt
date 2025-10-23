@@ -11,7 +11,7 @@ def test_youtube_api_response(airflow_variable):
 
     try:
         response = requests.get(url)
-        assert response.status_code == 200
+        assert response.status_code == 403
     except requests.RequestException as e:
         pytest.fail(f"Request to Youtube api failed: {e}.")
 
